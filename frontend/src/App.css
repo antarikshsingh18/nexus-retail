@@ -381,3 +381,60 @@ body {
 .delete-btn:active {
   transform: translateY(0);
 }
+
+.analytics-bar {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+  width: 100%;
+}
+
+.metric-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  padding: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  box-shadow: var(--shadow-sm);
+}
+
+.metric-icon {
+  font-size: 2rem;
+  background: #f1f5f9;
+  padding: 0.5rem;
+  border-radius: 8px;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.metric-info h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.metric-info p {
+  margin: 0.2rem 0 0 0;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+.alert-text {
+  color: #ef4444 !important;
+}
+
+/* Make it responsive if screen gets too small */
+@media (max-width: 768px) {
+  .analytics-bar {
+    grid-template-columns: 1fr;
+  }
+}

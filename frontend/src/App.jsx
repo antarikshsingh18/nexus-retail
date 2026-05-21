@@ -12,6 +12,15 @@ function App() {
   const [imageUrl, setImageUrl] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
+  // Automatically computes store metrics every time the products array updates
+const totalSKUs = products.length;
+
+const totalValue = products.reduce((sum, product) => {
+  return sum + (Number(product.price) * Number(product.stock));
+}, 0);
+
+const lowStockItems = products.filter(product => product.stock === 0).length;
+
   const fetchProducts = async () => {
     try {
       const response = await fetch('http://localhost:5000/api/products');
@@ -108,6 +117,35 @@ function App() {
           <span className="count-badge">{products.length}</span> Unique SKUs Active
         </div>
       </header>
+
+      {/* ✨ REAL-TIME INVENTORY ANALYTICS BAR ✨ */}
+<div className="analytics-bar">
+  <div className="metric-card">
+    <span className="metric-icon">📦</span>
+    <div className="metric-info">
+      <h4>Active SKUs</h4>
+      <p>{totalSKUs} Items</p>
+    </div>
+  </div>
+
+  <div className="metric-card">
+    <span className="metric-icon">💰</span>
+    <div className="metric-info">
+      <h4>Total Inventory Value</h4>
+      <p>${totalValue.toFixed(2)}</p>
+    </div>
+  </div>
+
+  <div className="metric-card">
+    <span className="metric-icon">⚠️</span>
+    <div className="metric-info">
+      <h4>Stock Shortages</h4>
+      <p className={lowStockItems > 0 ? "alert-text" : ""}>
+        {lowStockItems} Sold Out
+      </p>
+    </div>
+  </div>
+</div>
 
       <div className="dashboard-layout">
         {/* Left Side: Merchant Control Form Panel */}
